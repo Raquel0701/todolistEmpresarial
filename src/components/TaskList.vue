@@ -3,7 +3,10 @@
         <!-- <small>
             Menu: {{ menu }}
         </small> -->
-      
+        <span hidden>
+
+            {{ refresh }}
+        </span>
         <div class="text-end">
 
             <span class="b text-primary font-weight-bold  rounded-circle h4">
@@ -154,6 +157,20 @@ export default {
         editTaskHidden() {
             this.$emit('edit-task-hidden');
         },
+
+        allTasksMenu() {
+            if (this.menuLocal == 'Important') {
+                this.fetchTaskImportant();
+            }
+
+            if (this.menuLocal == 'Todo') {
+                this.fetchTaskTodo();
+            }
+            if (this.menuLocal == 'All Tasks') {
+                this.fetchTask();
+            }
+        },
+
         handleEditTask(task) {
             this.editTask(task);
         },
@@ -168,9 +185,9 @@ export default {
         },
         async updatePriorityTask(dataTask) {
             try {
-                const oppositeStatus = dataTask.statusTask === "true" ? '"false"' : '"true"'; 
+                const oppositeStatus = dataTask.statusTask === "true" ? '"false"' : '"true"';
                 const newTasks = await editTaskPriority(this.$store, dataTask.idTask, oppositeStatus);
-                this.tasks = newTasks; 
+                this.tasks = newTasks;
             } catch (error) {
                 console.error('Error updating task:', error);
             }
@@ -187,9 +204,9 @@ export default {
         },
         async updateStatusTask(dataTask) {
             try {
-                const oppositeStatus = dataTask.statusTask === "true" ? '"false"' : '"true"'; 
+                const oppositeStatus = dataTask.statusTask === "true" ? '"false"' : '"true"';
                 const newTasks = await editStatusTask(this.$store, dataTask.idTask, oppositeStatus);
-                this.tasks = newTasks; 
+                this.tasks = newTasks;
             } catch (error) {
                 console.error('Error updating task:', error);
             }
@@ -219,7 +236,6 @@ export default {
         },
         menu(newMenuValue) {
             this.menuLocal = newMenuValue;
-            this.taskListStyle = this.taskCount < 5 ? 'height: 300px; overflow-y: scroll;' : 'height: 700px; overflow-y: scroll;';
 
             if (this.menuLocal == 'Important') {
                 this.fetchTaskImportant();
@@ -242,8 +258,15 @@ export default {
             }
         },
         refresh() {
-            if (this.refresh) {
+            if (this.menuLocal == 'Important') {
+                this.fetchTaskImportant();
+            }
+
+            if (this.menuLocal == 'Todo') {
                 this.fetchTaskTodo();
+            }
+            if (this.menuLocal == 'All Tasks') {
+                this.fetchTask();
             }
         },
         reviewPriority: {
@@ -253,12 +276,11 @@ export default {
         }
 
     },
-   
+
     created() {
         this.fetchTaskTodo();
     },
 };
 </script>
   
-<style scoped>
-</style>
+<style scoped></style>

@@ -88,7 +88,7 @@ export const getTasks = async (store, userId) => {
     }));
 
     // Agregar las tareas al store utilizando la mutación
-    store.commit("todoModule/addAllTaskStore", response.data);
+    store.commit("todoModule/addAllTaskStore", mappedTasks);
 
     return mappedTasks;
   } catch (error) {

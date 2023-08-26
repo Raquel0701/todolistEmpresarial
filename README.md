@@ -42,6 +42,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 8. **vue-router (^3.6.5)**: Vue Router es la librería oficial de enrutamiento para Vue.js. Permite gestionar la navegación en una aplicación Vue de una manera declarativa, permitiendo que los componentes se muestren y oculten según la URL actual.
 
+9. **moment (^2.29.4)**: Es una biblioteca de JavaScript que se utiliza para manipular, formatear y mostrar fechas y horas. Proporciona una gran cantidad de funcionalidades para trabajar con fechas, como análisis, validación, cálculos, formato y manipulación. Moment es ampliamente utilizado en aplicaciones web para tareas relacionadas con fechas y horarios.
+
+9. **vuex (^2.5.0)**: Vuex es una biblioteca de administración de estado para aplicaciones Vue.js en su versión 2.5.0. Proporciona un patrón de arquitectura y herramientas para gestionar el estado global de una aplicación de manera estructurada. Vuex se utiliza para resolver el problema de compartir y mantener el estado entre múltiples componentes en una aplicación Vue.
+
+
 ## DEV Dependencies
 
 Por supuesto, aquí tienes una descripción de cada una de las dependencias adicionales listadas en tu fragmento de código:

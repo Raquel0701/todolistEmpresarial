@@ -80,9 +80,6 @@ export default {
   },
   watch: {
     tasks(newTasks) {
-      // Se ejecuta cuando cambia la propiedad tasks
-      console.log("Nuevas tareas:", newTasks);
-      // Actualizar la lista de tareas y recalcular la página actual
       this.tasks = newTasks;
       this.internalPage = 1; // Volver a la primera página
     },
@@ -109,11 +106,9 @@ export default {
       this.selectedTask = task; // Muestra el detalle de la tarea en UserDashboard
 
 
-      console.log("detalleee", task)
     },
 
     handleTaskAdded(updatedTasks) {
-      console.log("recibe userdash", updatedTasks)
       this.tasks = updatedTasks; // Actualizar el arreglo de tareas con las tareas actualizadas
       this.refresh = true;
     },
