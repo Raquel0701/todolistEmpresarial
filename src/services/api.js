@@ -290,7 +290,6 @@ export const editStatusStepTask = async (idStepTask, newStatus) => {
       { statusStepTask: newStatus }
     );
 
-    // store.commit("todoModule/TaskStore", response.data);
 
     return response.data;
   } catch (error) {
