@@ -19,9 +19,26 @@
         <b-form-group label="Email" label-for="email-input">
           <b-form-input v-model="registrationData.emailUser" id="email-input" placeholder="Email" required></b-form-input>
         </b-form-group>
-        <b-form-group label="Password" label-for="password-input">
+        <!-- <b-form-group label="Password" label-for="password-input">
           <b-form-input v-model="registrationData.passwordUser" id="password-input" type="password" placeholder="Password"
             required></b-form-input>
+        </b-form-group> -->
+
+        <b-form-group label="Password" label-for="password-input">
+          <b-form-input v-model="registrationData.passwordUser" id="password-input" type="password" placeholder="Password"
+            required @input="checkPasswordStrength"></b-form-input>
+
+          <b-row class="m-1" v-if="passwordStrength.score">
+            <b-col md="8" class="mt-2 justify-content-between">
+              <b-progress :value="passwordStrength.score * 25" :max="100" :variant="getVariant()" style="height: 5px;">
+              </b-progress>
+            </b-col>
+            <b-col>
+              <small :class="passwordStrengthClassText">
+                {{ passwordStrengthLabel }}
+              </small>
+            </b-col>
+          </b-row>
         </b-form-group>
         <div class="mt-4 text-end">
 
@@ -35,6 +52,7 @@
   
 <script>
 import { registerUser } from '@/services/api';
+import zxcvbn from 'zxcvbn';
 
 export default {
 
@@ -49,18 +67,47 @@ export default {
       aviso: {
         titulo: '',
         texto: '',
-        type: 'success' 
+        type: 'success'
       },
       identificationError: '',
-      isRegistered: false
-
+      isRegistered: false,
+      passwordStrength: {
+        score: 0,
+      },
     };
+  },
+  watch: {
+    aviso: {
+      handler() {
+        this.reloadPageAfterNotification();
+      },
+      deep: true
+    }
+  },
+  computed: {
+    passwordStrengthClassText() {
+      return {
+        "text-danger": this.passwordStrength.score <= 2,
+        "text-warning": this.passwordStrength.score === 3,
+        "text-success": this.passwordStrength.score >= 4,
+      };
+    },
+    passwordStrengthLabel() {
+      const score = this.passwordStrength.score;
+      if (score <= 2) {
+        return "Weak";
+      } else if (score === 3) {
+        return "Medium";
+      } else {
+        return "Strong";
+      }
+    },
   },
   methods: {
     async register() {
       try {
         const userData = await registerUser(this.registrationData);
-
+  
         if (userData.isSuccess) {
           this.aviso.titulo = '¡Registrado!';
           this.aviso.texto = 'El registro se ha completado exitosamente.';
@@ -77,7 +124,7 @@ export default {
         this.aviso.titulo = 'Atención!';
         this.aviso.texto = error.response.data.errorMessages[0];
         this.aviso.type = 'warning';
-
+  
         console.error('Registration error:', error.response.data.errorMessages[0]);
       }
     },
@@ -96,18 +143,26 @@ export default {
       if (this.isRegistered) {
         setTimeout(() => {
           location.reload();
-        }, 3000); 
+        }, 3000);
       }
-    }
+    },
+    checkPasswordStrength() {
+      const password = this.registrationData.passwordUser;
+      const result = zxcvbn(password);
+      this.passwordStrength = { score: result.score };
+    },
+    getVariant() {
+      if (this.passwordStrength.score === 0) {
+        return 'light';
+      } else if (this.passwordStrength.score <= 2) {
+        return 'danger';
+      } else if (this.passwordStrength.score === 3) {
+        return 'warning';
+      } else if (this.passwordStrength.score >= 4) {
+        return 'success';
+      }
+    },
   },
-  watch: {
-    aviso: {
-      handler() {
-        this.reloadPageAfterNotification();
-      },
-      deep: true
-    }
-  }
 };
 </script>
   

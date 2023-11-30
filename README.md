@@ -69,6 +69,7 @@ Por supuesto, aquí tienes una descripción de cada una de las dependencias adic
 
 9. **sass-loader (^13.3.2)**: El paquete `sass-loader` se utiliza junto con webpack para cargar archivos `.scss` y `.sass` y compilarlos en CSS. Funciona especialmente bien con Vue.js y otros marcos de trabajo.
 
+10. **zxcvbn: ^4.4.2**: Es una biblioteca de estimación de la fortaleza de contraseñas. Ayuda a evaluar la fortaleza de una contraseña y proporciona retroalimentación a los usuarios sobre la calidad de las contraseñas que eligen.
 
 ## Structure
 ```
