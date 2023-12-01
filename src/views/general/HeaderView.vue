@@ -12,7 +12,8 @@
                         </svg> -->
                     </a>
                 </div>
-                <h4 class="text-center mx-auto">TodoList Five!</h4>
+                <h4 class="text-center mx-auto">TodoList </h4>
+                <h4 class="text-end ">Secure software</h4>
                 <div v-if="isAuthenticated">
                     <b-row>
                         <b-col class="mt-1">

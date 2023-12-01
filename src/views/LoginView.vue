@@ -20,7 +20,7 @@
         </div>
       </b-form>
       <!-- <div class="text-end">
-        <small >Don't you have an account? Create Account</small>
+        <small >Don't you have an account?<span class="text-primary"> Create Account</span></small>
       </div> -->
     </b-container>
     <AvisoModal :aviso="aviso" />
@@ -83,7 +83,7 @@ export default {
         }
       } catch (error) {
         console.error('Login error:', error);
-        this.loginMessage = 'You are not a registered user yet.';
+        this.loginMessage = 'Invalid username or password, please try again!';
       }
     },
     toPageAfterNotification() {

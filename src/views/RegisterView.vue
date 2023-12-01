@@ -19,15 +19,11 @@
         <b-form-group label="Email" label-for="email-input">
           <b-form-input v-model="registrationData.emailUser" id="email-input" placeholder="Email" required></b-form-input>
         </b-form-group>
-        <!-- <b-form-group label="Password" label-for="password-input">
-          <b-form-input v-model="registrationData.passwordUser" id="password-input" type="password" placeholder="Password"
-            required></b-form-input>
-        </b-form-group> -->
 
         <b-form-group label="Password" label-for="password-input">
-          <b-form-input v-model="registrationData.passwordUser" id="password-input" type="password" placeholder="Password"
-            required @input="checkPasswordStrength"></b-form-input>
 
+          <b-form-input v-model="registrationData.passwordUser" placeholder="Password" type="password" required
+            :class="passwordStrengthClassText" @input="checkPasswordStrength"></b-form-input>
           <b-row class="m-1" v-if="passwordStrength.score">
             <b-col md="8" class="mt-2 justify-content-between">
               <b-progress :value="passwordStrength.score * 25" :max="100" :variant="getVariant()" style="height: 5px;">
@@ -42,14 +38,15 @@
         </b-form-group>
         <div class="mt-4 text-end">
 
-          <b-button type="submit" variant="success" class="w-100">Register</b-button>
+          <b-button v-if="passwordStrength.score >= 4" type="submit" variant="success" class="w-100">Register</b-button>
+
         </div>
       </b-form>
       <AvisoModal :aviso="aviso" />
     </b-container>
   </div>
 </template>
-  
+
 <script>
 import { registerUser } from '@/services/api';
 import zxcvbn from 'zxcvbn';
@@ -79,7 +76,7 @@ export default {
   watch: {
     aviso: {
       handler() {
-        this.reloadPageAfterNotification();
+        // this.reloadPageAfterNotification();
       },
       deep: true
     }
@@ -107,7 +104,7 @@ export default {
     async register() {
       try {
         const userData = await registerUser(this.registrationData);
-  
+
         if (userData.isSuccess) {
           this.aviso.titulo = '¡Registrado!';
           this.aviso.texto = 'El registro se ha completado exitosamente.';
@@ -124,7 +121,7 @@ export default {
         this.aviso.titulo = 'Atención!';
         this.aviso.texto = error.response.data.errorMessages[0];
         this.aviso.type = 'warning';
-  
+
         console.error('Registration error:', error.response.data.errorMessages[0]);
       }
     },
@@ -165,7 +162,7 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 /* Estilos específicos de la vista */
 </style>
