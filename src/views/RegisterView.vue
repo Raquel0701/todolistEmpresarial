@@ -17,13 +17,30 @@
           <b-form-input v-model="registrationData.nameUser" id="name-input" placeholder="Name" required></b-form-input>
         </b-form-group>
         <b-form-group label="Email" label-for="email-input">
-          <b-form-input v-model="registrationData.emailUser" id="email-input" placeholder="Email" required></b-form-input>
+          <b-form-input v-model="registrationData.emailUser" id="email-input" placeholder="Email" required
+            :class="{ 'is-invalid': !isEmailValid }"></b-form-input>
+          <small v-if="!isEmailValid" class="text-danger">Please enter a valid email address!</small>
         </b-form-group>
 
-        <b-form-group label="Password" label-for="password-input">
 
-          <b-form-input v-model="registrationData.passwordUser" placeholder="Password" type="password" required
-            :class="passwordStrengthClassText" @input="checkPasswordStrength"></b-form-input>
+
+        <b-form-group label-for="password-input">
+          <b-row >
+            <b-col md="9">
+              <label for="password-input">Password</label>
+            </b-col>
+            <b-col>
+              <b-button @click="togglePasswordVisibility" variant="transparent" class="ml-2 btn-sm"
+                v-if="registrationData.passwordUser">
+                <b-icon v-if="showPassword" icon="eye-slash"></b-icon>
+                <b-icon v-else icon="eye"></b-icon>
+              </b-button>
+            </b-col>
+
+          </b-row>
+          <b-form-input v-model="registrationData.passwordUser" placeholder="Password"
+            :type="showPassword ? 'text' : 'password'" required :class="passwordStrengthClassText"
+            @input="checkPasswordStrength"></b-form-input>
           <b-row class="m-1" v-if="passwordStrength.score">
             <b-col md="8" class="mt-2 justify-content-between">
               <b-progress :value="passwordStrength.score * 25" :max="100" :variant="getVariant()" style="height: 5px;">
@@ -38,7 +55,8 @@
         </b-form-group>
         <div class="mt-4 text-end">
 
-          <b-button v-if="passwordStrength.score >= 4" type="submit" variant="success" class="w-100">Register</b-button>
+          <b-button v-if="passwordStrength.score >= 4 && isEmailValid" type="submit" variant="success"
+            class="w-100">Register</b-button>
 
         </div>
       </b-form>
@@ -71,6 +89,7 @@ export default {
       passwordStrength: {
         score: 0,
       },
+      showPassword: false,
     };
   },
   watch: {
@@ -82,6 +101,11 @@ export default {
     }
   },
   computed: {
+    isEmailValid() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(this.registrationData.emailUser);
+    },
+
     passwordStrengthClassText() {
       return {
         "text-danger": this.passwordStrength.score <= 2,
@@ -158,6 +182,9 @@ export default {
       } else if (this.passwordStrength.score >= 4) {
         return 'success';
       }
+    },
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
     },
   },
 };
