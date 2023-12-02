@@ -44,7 +44,6 @@
 <script>
 import LoginInicial from './LoginView.vue'
 import RegisterView from './RegisterView.vue';
-// import SliderHome from './general/SliderHome.vue';
 import FooterView from './general/FooterView.vue';
 import HeaderView from './general/HeaderView.vue';
 
@@ -55,7 +54,6 @@ export default {
         RegisterView,
         FooterView,
         HeaderView,
-        //  SliderHome
     },
 
 

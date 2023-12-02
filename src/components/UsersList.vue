@@ -43,7 +43,3 @@ export default {
 };
 </script>
   
-<style scoped>
-/* Estilos específicos del componente */
-</style>
-  

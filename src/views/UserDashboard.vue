@@ -26,7 +26,6 @@
             <b-card class="mt-3">
               <TaskList :tasks="tasks" @edit-task="handleEditTask" @edit-task-hidden="handleEditTaskHidden"
                 :menu="activeNavItem" :selectedTask="selectedTask" :refresh="refresh" />
-              <!-- <TaskList :tasks="tasks" @edit-task="handleEditTask" :menu="activeNavItem" :selectedTask="selectedTask" /> -->
             </b-card>
           </div>
         </div>
@@ -46,7 +45,7 @@
 <script>
 import TaskForm from '@/components/TaskForm';
 import TaskListDetail from '@/components/TaskListDetail';
-import TaskList from '@/components/TaskList.vue'; // Agrega la importación del componente TaskList
+import TaskList from '@/components/TaskList.vue'; 
 import HeaderView from './general/HeaderView';
 import FooterView from './general/FooterView';
 import MenuView from './general/MenuView';
@@ -70,9 +69,9 @@ export default {
       activeNavItem: 'Todo',
       showTaskDetail: false,
       selectedTask: null,
-      tasks: [], // Agrega esta propiedad para almacenar las tareas
-      perPage: 10, // Define la cantidad de tareas por página
-      currentPage: 1, // Define la página actual
+      tasks: [], 
+      perPage: 10, 
+      currentPage: 1, 
       tareas: [],
       refresh: false,
       store
@@ -81,43 +80,41 @@ export default {
   watch: {
     tasks(newTasks) {
       this.tasks = newTasks;
-      this.internalPage = 1; // Volver a la primera página
+      this.internalPage = 1; 
     },
   },
   methods: {
-    // Manejar la selección de un elemento de navegación
+    
     handleNavigation(selectedItem) {
       this.activeNavItem = selectedItem;
     },
     handleEditTask(task) {
-      this.selectedTask = task; // Set the selected task
-      this.showTaskDetail = true; // Show the task detail component
+      this.selectedTask = task; 
+      this.showTaskDetail = true; 
     },
     handleEditTaskHidden() {
-      this.selectedTask = null; // Set the selected task
-      this.showTaskDetail = false; // Show the task detail component
+      this.selectedTask = null; 
+      this.showTaskDetail = false; 
     },
     actualizar(updatedTasks) {
-      this.tasks = updatedTasks; // Actualizar la lista de tareas con la nueva lista
+      this.tasks = updatedTasks; 
     },
 
 
     handleShowTaskDetail(task) {
-      this.selectedTask = task; // Muestra el detalle de la tarea en UserDashboard
+      this.selectedTask = task; 
 
 
     },
 
     handleTaskAdded(updatedTasks) {
-      this.tasks = updatedTasks; // Actualizar el arreglo de tareas con las tareas actualizadas
+      this.tasks = updatedTasks; 
       this.refresh = true;
     },
   }
 
-  // Otras propiedades y lógica
+ 
 };
 </script>
 
-<style scoped>
-/* Estilos específicos de la vista */
-</style>
+

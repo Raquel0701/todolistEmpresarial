@@ -41,6 +41,6 @@ export default {
 
 <style scoped>
 .messageClass {
-  color: #28a745; /* Color verde para mensajes de éxito */
+  color: #28a745; 
 }
 </style>

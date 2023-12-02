@@ -96,6 +96,7 @@ export default {
   watch: {
     aviso: {
       handler() {
+        
         // this.reloadPageAfterNotification();
       },
       deep: true
@@ -147,7 +148,6 @@ export default {
         this.aviso.texto = error.response.data.errorMessages[0];
         this.aviso.type = 'warning';
 
-        // console.error('Registration error:', error.response.data.errorMessages[0]);
       }
     },
     vaciarCampos() {
@@ -192,6 +192,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Estilos específicos de la vista */
-</style>
+

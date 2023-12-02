@@ -33,7 +33,6 @@ body {
 
   &::placeholder {
     color: white !important;
-    /* Otros estilos para el placeholder (opcional) */
   }
 
   &::-webkit-input-placeholder {
@@ -50,20 +49,14 @@ body {
 
   &::-moz-placeholder {
     color: white !important;
-    opacity: 1; /* Firefox necesita esta propiedad para que el color funcione */
+    opacity: 1;
   }
 }
 
-// .footerStyle {
-//   // background-color: $primary-color !important;
-//   // width: 100% !important;
-//   // height: 8vh !important;
-//   flex-shrink: 0;
-//   color: white !important;
-// }
+
 
 .tabs-height {
-  height: 60vh !important;  /* Ajusta la altura según tus necesidades */
+  height: 60vh !important; 
 }
 .no-border-input .form-control {
   border: none;
@@ -72,15 +65,12 @@ body {
 
 .small-datepicker .datepicker-dropdown {
   font-size: 0.8rem;
-  /* Ajusta el tamaño de fuente según tus necesidades */
 }
-/* Works on Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: blue orange;
 }
 
-/* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 5px;
 }

@@ -1,12 +1,6 @@
 <template>
     <div>
-        <!-- <small>
-            Menu: {{ menu }}
-        </small> -->
-        <span hidden>
-
-            {{ refresh }}
-        </span>
+      
         <div class="text-end">
 
             <span class="b text-primary font-weight-bold  rounded-circle h4">
@@ -35,14 +29,12 @@
                                     v-model="row.item.selected" style="transform: scale(2); border-radius: 5rem;"
                                     @change="handleCheckboxChange(row.item)">
                                 <label class="form-check-label"></label>
-                                <!-- <small>{{ reviewPriority }}</small> -->
                             </div>
                         </div>
                         <div v-else>
                             <div>
                                 <b-icon icon="check-circle-fill" class="text-success h2"
                                     @click="handleCheckboxChange(row.item)"></b-icon>
-                                <!-- <small>{{ reviewPriority }}</small> -->
                             </div>
                         </div>
                     </div>
@@ -85,7 +77,6 @@
 import { getTasks, editStatusTask, editTaskPriority, getTasksPriority, getTasksTodo } from '@/services/api';
 import { getAuthData } from '@/services/auth';
 import moment from 'moment';
-// import { store } from "../store/index";
 import { mapGetters } from 'vuex';
 export default {
     name: 'TaskList',
@@ -108,7 +99,7 @@ export default {
                 { key: 'idTask', label: '', thClass: 'col-md' },
             ],
             tasks: [],
-            perPage: 3, // Número de tareas por página
+            perPage: 3, 
             fields: [
                 { key: 'idTask', label: '' },
                 { key: 'nameTask', label: 'Name' },
@@ -282,5 +273,3 @@ export default {
     },
 };
 </script>
-  
-<style scoped></style>

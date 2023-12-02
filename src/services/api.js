@@ -87,7 +87,7 @@ export const getTasks = async (store, userId) => {
       statusTask: task.statusTask === "0" ? "false" : task.statusTask,
     }));
 
-    // Agregar las tareas al store utilizando la mutación
+  
     store.commit("todoModule/addAllTaskStore", mappedTasks);
 
     return mappedTasks;
@@ -132,9 +132,9 @@ export const getTasksTodo = async (store, userId) => {
         ...task,
         statusTask: task.statusTask === "0" ? "false" : task.statusTask,
       }))
-      .filter((task) => task.statusTask === "false"); // Filtrar tareas con statusTask igual a "false"
+      .filter((task) => task.statusTask === "false"); 
 
-    // Agregar las tareas al store utilizando la mutación
+    
     store.commit("todoModule/addAllTaskStore", mappedTasks);
 
     return mappedTasks;
@@ -162,7 +162,7 @@ export const getTasksPriority = async (store, userId) => {
       (task) => task.priorityTask === "true"
     );
 
-    // Agregar las tareas filtradas al store utilizando la mutación
+    
     store.commit("todoModule/addAllTaskStore", filteredTasks);
 
     return filteredTasks;
@@ -308,7 +308,7 @@ export const getUsers = async () => {
   }
 };
 
-//GETTASKS IDUSER
+
 
 export default {
   login,

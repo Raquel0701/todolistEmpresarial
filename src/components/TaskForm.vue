@@ -58,7 +58,7 @@
   
 <script>
 import { addTask } from '@/services/api';
-import { getAuthData } from '@/services/auth'; // Ajusta la ruta a tu ubicación
+import { getAuthData } from '@/services/auth'; 
 import moment from 'moment';
 
 export default {
@@ -67,7 +67,7 @@ export default {
       aviso: {
         titulo: '',
         texto: '',
-        type: 'success' // Puedes cambiar el tipo de aviso según tus necesidades
+        type: 'success' 
       },
 
       taskName: '',

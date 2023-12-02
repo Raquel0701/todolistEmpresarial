@@ -1,4 +1,3 @@
-// src/services/auth.js
 export const setAuthData = (token, nameUser, idUser) => {
   localStorage.setItem('token', token);
   localStorage.setItem('nameUser', nameUser);

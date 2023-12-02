@@ -8,8 +8,8 @@
       </div>
       <b-form @submit.prevent="login">
         <b-form-group label-for="username-input">
-          <b-form-input v-model="identificationUser" id="username-input" placeholder="Identification"  type="number"  required
-            class="m-2"></b-form-input>
+          <b-form-input v-model="identificationUser" id="username-input" placeholder="Identification" type="number"
+            required class="m-2"></b-form-input>
         </b-form-group>
         <b-form-group>
           <b-form-input v-model="passwordUser" placeholder="Password" type="password" required class="m-2"></b-form-input>
@@ -19,9 +19,6 @@
           <b-button type="submit" variant="success" class="m-2 w-100">Login</b-button>
         </div>
       </b-form>
-      <!-- <div class="text-end">
-        <small >Don't you have an account?<span class="text-primary"> Create Account</span></small>
-      </div> -->
     </b-container>
     <AvisoModal :aviso="aviso" />
 
@@ -54,33 +51,29 @@ export default {
   },
   computed: {
     messageClass() {
-      return this.loginMessage.includes('error') ? 'text-danger' : 'text-danger';
+      return this.loginMessage.includes('error') ? 'text-danger' : 'text-success';
     }
+
   },
   methods: {
     async login() {
       try {
         const userData = await login(this.identificationUser, this.passwordUser);
 
-        if (userData.isSuccess && userData.result && userData.result.usuario) {
-          this.loggedInUserName = userData.result.usuario.nameUser;
+        this.loggedInUserName = userData.result.usuario.nameUser;
 
-          localStorage.setItem('token', userData.result.token);
+        localStorage.setItem('token', userData.result.token);
 
-          const loggedInUserName = userData.result.usuario.nameUser;
-          const loggedIdUser = userData.result.usuario.idUser;
+        const loggedInUserName = userData.result.usuario.nameUser;
+        const loggedIdUser = userData.result.usuario.idUser;
 
-          setAuthData(userData.result.token, loggedInUserName, loggedIdUser);
-          this.aviso.titulo = 'Welcome!';
-          this.aviso.texto = loggedInUserName;
-          this.aviso.type = 'success';
+        setAuthData(userData.result.token, loggedInUserName, loggedIdUser);
+        this.aviso.titulo = 'Welcome!';
+        this.aviso.texto = loggedInUserName;
+        this.aviso.type = 'success';
 
-          this.isLogged = true;
-          // this.$router.push({ name: 'UserDashboard' });
-        } else {
-          console.error('Login error:', userData.errorMessages);
-          this.loginMessage = 'Login failed. Please check your credentials.';
-        }
+        this.isLogged = true;
+
       } catch (error) {
         console.error('Login error:', error);
         this.loginMessage = 'Invalid username or password, please try again!';
@@ -90,7 +83,7 @@ export default {
       if (this.isLogged) {
         setTimeout(() => {
           this.$router.push({ name: 'UserDashboard' });
-        }, 2000); 
+        }, 2000);
       }
     },
 

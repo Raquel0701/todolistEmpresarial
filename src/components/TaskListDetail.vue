@@ -99,13 +99,13 @@
 </template>
   
 <script>
-import { getAuthData } from '@/services/auth'; // Ajusta la ruta a tu ubicación
+import { getAuthData } from '@/services/auth'; 
 import { editTask, addStepTask, getStepTasks, editStepStatusTask } from '@/services/api';
 import moment from 'moment';
 import { mapGetters } from 'vuex';
 export default {
   props: {
-    selectedTask: Object // The selected task object to display details
+    selectedTask: Object 
   },
   data() {
     return {
@@ -163,9 +163,8 @@ export default {
           nameTask: this.localTask.nameTask,
           detailTask: this.localTask.detailTask,
           statusTask: this.localTask.statusTask,
-          // limitTask: this.localTask.limitTask,
           priorityTask: this.localTask.priorityTask,
-          idCategory: this.selectedGroup, // Agregar la propiedad idCategory
+          idCategory: this.selectedGroup,
           limitTask: this.selectedLimitDate,
         };
         await editTask(this.$store, this.localTask.idTask, updatedTaskData);
@@ -195,7 +194,7 @@ export default {
     },
 
     addStep() {
-      this.newStep = ''; // Limpiar el campo después de agregar
+      this.newStep = ''; 
       this.addStepTask(this.localSteps[0]);
       this.localSteps[0].nameStepTask = ""
     },
@@ -208,7 +207,7 @@ export default {
       try {
         const oppositeStatus = dataTask.statusStepTask === '"true"' ? '"false"' : '"true"';
         const newTasks = await editStepStatusTask(this.$store, dataTask.idStepTask, oppositeStatus);
-        this.tasks = newTasks; //this.fetchTask();
+        this.tasks = newTasks; 
       } catch (error) {
         console.error('Error updating task:', error);
       }
@@ -217,7 +216,5 @@ export default {
 };
 </script>
   
-<style scoped>
-/* Styles for the task detail component */
-</style>
+
   
