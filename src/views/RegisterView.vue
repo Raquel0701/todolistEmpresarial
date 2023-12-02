@@ -10,7 +10,7 @@
           <label for="identification-input">Identification</label>
           <small v-if="identificationError" class="text-danger">{{ identificationError }}</small>
           <b-form-input v-model="registrationData.identificationUser" id="identification-input" type="number"
-            max="9999999999999" placeholder="Identification" required @input="restrictLength"></b-form-input>
+            max="9999999999" placeholder="Identification" required @input="restrictLength"></b-form-input>
         </b-form-group>
         <b-form-group label-for="name-input">
           <label for="name-input">Full Name</label>
@@ -18,14 +18,15 @@
         </b-form-group>
         <b-form-group label="Email" label-for="email-input">
           <b-form-input v-model="registrationData.emailUser" id="email-input" placeholder="Email" required
-            :class="{ 'is-invalid': !isEmailValid }"></b-form-input>
-          <small v-if="!isEmailValid" class="text-danger">Please enter a valid email address!</small>
+            :class="{ 'is-invalid': !isEmailValid && registrationData.emailUser !== '' }"></b-form-input>
+          <small v-if="!isEmailValid && registrationData.emailUser !== ''" class="text-danger">Please enter a valid email
+            address!</small>
         </b-form-group>
 
 
 
         <b-form-group label-for="password-input">
-          <b-row >
+          <b-row>
             <b-col md="9">
               <label for="password-input">Password</label>
             </b-col>
@@ -146,7 +147,7 @@ export default {
         this.aviso.texto = error.response.data.errorMessages[0];
         this.aviso.type = 'warning';
 
-        console.error('Registration error:', error.response.data.errorMessages[0]);
+        // console.error('Registration error:', error.response.data.errorMessages[0]);
       }
     },
     vaciarCampos() {
@@ -154,6 +155,7 @@ export default {
       this.registrationData.nameUser = '';
       this.registrationData.emailUser = '';
       this.registrationData.passwordUser = '';
+      this.passwordStrength.score = 0;
     },
     restrictLength() {
       if (this.registrationData.identificationUser.length > 13) {
